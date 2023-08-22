@@ -18,6 +18,7 @@ namespace TableDbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Table keys and constraints
             modelBuilder.Entity<AOTable>()
                 .Property(table => table.Id).IsRequired();
             modelBuilder.Entity<AOTable>()
@@ -30,6 +31,7 @@ namespace TableDbContext
                 .Property(table=>table.Comment).HasMaxLength(2408);
 
             modelBuilder.Entity<AOTable>().HasKey(table => table.Id);
+            #endregion
 
         }
     }
