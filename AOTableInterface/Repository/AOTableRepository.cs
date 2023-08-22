@@ -18,7 +18,8 @@ namespace AOTableInterface.Repository
         {
             _context = context;
         }
-        public  async Task<ICollection<AOTable>> GetTable(string name, string[] typeList)
+        #region Get Search Table
+        public async Task<ICollection<AOTable>> GetTable(string? name, string[] typeList)
         {
             if (!string.IsNullOrEmpty(name)&&typeList.Length==0)
             {
@@ -40,7 +41,7 @@ namespace AOTableInterface.Repository
                 return null;
             }          
         }
-            
-     }
- }
+        #endregion
+    }
+}
 

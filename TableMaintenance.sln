@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TableDbContext", "Applicati
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Test", "5.Test", "{E02078C3-B4BD-416D-8AA6-146F9BBE0620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapper", "Mapper\Mapper.csproj", "{BA795087-D70C-4A27-A05B-4167CB8B66A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapper", "Mapper\Mapper.csproj", "{BA795087-D70C-4A27-A05B-4167CB8B66A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableMaintenanceTest", "TableMaintenanceControllerTest\TableMaintenanceTest.csproj", "{9A8DD4B1-F3A7-42AB-8C6C-4A016EE0E6C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{BA795087-D70C-4A27-A05B-4167CB8B66A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA795087-D70C-4A27-A05B-4167CB8B66A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA795087-D70C-4A27-A05B-4167CB8B66A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A8DD4B1-F3A7-42AB-8C6C-4A016EE0E6C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A8DD4B1-F3A7-42AB-8C6C-4A016EE0E6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A8DD4B1-F3A7-42AB-8C6C-4A016EE0E6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A8DD4B1-F3A7-42AB-8C6C-4A016EE0E6C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{560702DA-6205-462E-81D6-3F07548C7181} = {A0476C0D-A552-4990-8324-ADCA446A0EE3}
 		{A42DEC79-62D7-4CF9-87FB-1606756B2BDD} = {2F440AC0-2FA8-4491-AAAB-037AB32AE55A}
 		{BA795087-D70C-4A27-A05B-4167CB8B66A7} = {C888D5F5-F7B5-49A6-8BF3-7C891076564B}
+		{9A8DD4B1-F3A7-42AB-8C6C-4A016EE0E6C2} = {E02078C3-B4BD-416D-8AA6-146F9BBE0620}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE7ECC13-6B70-4900-9C6E-4B2560D1D0C2}
