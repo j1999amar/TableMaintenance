@@ -75,7 +75,20 @@ namespace TableMaintenance.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+        [HttpGet]
+        [Route("[controller]/ViewTable/{id}")]
+        public async Task<ActionResult<AOTableDTO>> ViewTable([FromRoute]Guid id)
+        {
+            if (_tableInterface.IsExists(id))
+            {
+                var table = await _tableInterface.ViewTable(id);
+                return Ok(table);
+            }
+            else
+            {
+                return NotFound("Table not found");
+            }
+        }
 
     }
 }

@@ -46,14 +46,18 @@ namespace AOTableInterface.Repository
         }
         #endregion
 
-        public async  Task<AOTable> AddTable(AOTable table)
+        public async Task<AOTable> AddTable(AOTable table)
         {
              await _context.Tables.AddAsync(table);
             var saved=await _context.SaveChangesAsync();
             return saved > 0 ? table:null ;
 
         }
-
+        public async Task<AOTable> ViewTable(Guid id)
+        {
+            var table=await _context.Tables.Where(x => x.Id == id).SingleOrDefaultAsync();
+            return table;
+        }
         public bool IsExists(Guid id)
         {
             return _context.Tables.Any(x => x.Id == id);
@@ -78,6 +82,8 @@ namespace AOTableInterface.Repository
 
             }
         }
+
+       
     }
 }
 

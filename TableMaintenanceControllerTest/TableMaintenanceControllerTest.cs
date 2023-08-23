@@ -162,6 +162,39 @@ namespace TableMaintenanceTest
             _tableMock.Verify(x => x.IsExists(table.Id), Times.Once);
             _tableMock.Verify(x => x.IsTypeExists(table.Type), Times.Once);
         }
+        [Fact]
+        public async void ViewTable_ShouldOkresponse_WhenTableIdIsExists()
+        {
+            //Arrange
+            var tableDTO=_fixture.Create<AOTableDTO>();
+            var table= _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x=>x.IsExists(table.Id)).Returns(true);
+
+            //Act
+            var result = await _sut.ViewTable(tableDTO.Id);
+
+            //Assertion
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<OkObjectResult>();
+            _tableMock.Verify(x=>x.IsExists(table.Id), Times.Once);
+        }
+        [Fact]
+        public async void ViewTable_ShouldOkresponse_WhenTableIdIsNotExists()
+        {
+            //Arrange
+            var tableDTO = _fixture.Create<AOTableDTO>();
+            var table = _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x => x.IsExists(table.Id)).Returns(false);
+
+            //Act
+            var result = await _sut.ViewTable(tableDTO.Id);
+
+            //Assertion
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<NotFoundObjectResult>();
+            _tableMock.Verify(x => x.IsExists(table.Id), Times.Once);
+        }
+
     }
 
 
