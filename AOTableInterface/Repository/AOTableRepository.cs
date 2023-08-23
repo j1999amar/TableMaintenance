@@ -58,6 +58,12 @@ namespace AOTableInterface.Repository
             var table=await _context.Tables.Where(x => x.Id == id).SingleOrDefaultAsync();
             return table;
         }
+        public async Task<AOTable> EditTable(AOTable table)
+        {
+            _context.Tables.Entry(table).State = EntityState.Modified;
+            var change=await _context.SaveChangesAsync();
+            return change > 0 ? table : null;
+        }
         public bool IsExists(Guid id)
         {
             return _context.Tables.Any(x => x.Id == id);
@@ -83,7 +89,12 @@ namespace AOTableInterface.Repository
             }
         }
 
-       
+        public  bool DeleteTable(Guid id)
+        {
+            var  table=  _context.Tables.Find(id);
+            _context.Tables.Remove(table);
+            return _context.SaveChanges() > 0 ? true : false;
+        }
     }
 }
 
