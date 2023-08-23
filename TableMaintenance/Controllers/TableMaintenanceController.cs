@@ -66,9 +66,6 @@ namespace TableMaintenance.Controllers
                     await _tableInterface.AddTable(table);
                     return Ok(table);
                 }
-
-                
-
             }
             catch(Exception ex) 
             {
@@ -79,14 +76,68 @@ namespace TableMaintenance.Controllers
         [Route("[controller]/ViewTable/{id}")]
         public async Task<ActionResult<AOTableDTO>> ViewTable([FromRoute]Guid id)
         {
-            if (_tableInterface.IsExists(id))
+            try
             {
-                var table = await _tableInterface.ViewTable(id);
-                return Ok(table);
+                if (_tableInterface.IsExists(id))
+                {
+                    var table = await _tableInterface.ViewTable(id);
+                    return Ok(table);
+                }
+                else
+                {
+                    return NotFound("Table not found");
+                }
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
-            else
+        }
+        [HttpPut]
+        [Route("[controller]/EditTable")]
+        public async Task<ActionResult<AOTableDTO>> EditTable([FromBody] AOTableDTO tableDTO)
+        {
+            try
             {
-                return NotFound("Table not found");
+                if (_tableInterface.IsExists(tableDTO.Id))
+                {
+                    if (!_tableInterface.IsTypeExists(tableDTO.Type))
+                    {
+                        return BadRequest("Type is not exsits");
+                    }
+                    if (string.IsNullOrEmpty(tableDTO.Description))
+                    {
+                        tableDTO.Description = tableDTO.Name;
+                    }
+                    var table = _mapper.Map<AOTable>(tableDTO);
+                    await _tableInterface.EditTable(table);
+                    return Ok(table);
+                }
+                else
+                {
+                    return BadRequest("Id Not Found");
+                }    
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete]
+        [Route("[controller]/deleteTable/{id}")]
+        public ActionResult DeleteTable([FromRoute] Guid id)
+        {
+            try
+            {
+                if ( _tableInterface.IsExists(id))
+                {
+                    _tableInterface.DeleteTable(id);
+                    return Ok("Deleted");
+                }
+                return NotFound("Id Not Found");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 

@@ -195,6 +195,149 @@ namespace TableMaintenanceTest
             _tableMock.Verify(x => x.IsExists(table.Id), Times.Once);
         }
 
+
+
+
+
+
+
+
+        [Fact]
+        public async void EditTable_ShouldReturnBadRequestResponse_WhenIdIsAlreadyIsNotExists()
+        {
+            //Arrange
+            var tableDTO = _fixture.Create<AOTableDTO>();
+            var table = _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x => x.IsExists(table.Id)).Returns(false);
+            _tableMock.Setup(x => x.IsTypeExists(table.Type)).Returns(false);
+
+            //Act
+            var result = await _sut.EditTable(tableDTO);
+
+            //Assertion
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<BadRequestObjectResult>();
+            _tableMock.Verify(x => x.IsExists(table.Id), Times.Once);
+            _tableMock.Verify(x => x.IsTypeExists(table.Type), Times.Never);
+
+        }
+        [Fact]
+        public async void EditTable_ShouldReturnOKResponse_WhenIdIsIsExists()
+        {
+            //Arrange
+            var tableDTO = _fixture.Create<AOTableDTO>();
+            var table = _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x => x.IsExists(table.Id)).Returns(true);
+            _tableMock.Setup(x => x.IsTypeExists(table.Type)).Returns(true);
+
+            //Act
+            var result = await _sut.EditTable(tableDTO);
+
+            //Assertion
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<OkObjectResult>();
+            _tableMock.Verify(x => x.IsExists(table.Id), Times.Once);
+            _tableMock.Verify(x => x.IsTypeExists(table.Type), Times.Once);
+        }
+        [Fact]
+        public async void EditTable_ShouldReturnBadRequestResponse_WhenTableTypeIsNotExists()
+        {
+            //Arrange
+            var tableDTO = _fixture.Create<AOTableDTO>();
+            var table = _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x => x.IsExists(table.Id)).Returns(true);
+            _tableMock.Setup(x => x.IsTypeExists(table.Type)).Returns(false);
+
+            //Act
+            var result = await _sut.EditTable(tableDTO);
+
+            //Assertion
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<BadRequestObjectResult>();
+            _tableMock.Verify(x => x.IsExists(table.Id), Times.Once);
+            _tableMock.Verify(x => x.IsTypeExists(table.Type), Times.Once);
+        }
+        [Fact]
+        public async void EditTable_ShouldReturnOkResponse_WhenTableTypeIsExists()
+        {
+            //Arrange
+            var tableDTO = _fixture.Create<AOTableDTO>();
+            var table = _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x => x.IsExists(table.Id)).Returns(true);
+            _tableMock.Setup(x => x.IsTypeExists(table.Type)).Returns(true);
+
+            //Act
+            var result = await _sut.EditTable(tableDTO);
+
+            //Assertion
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<OkObjectResult>();
+            _tableMock.Verify(x => x.IsExists(table.Id), Times.Once);
+            _tableMock.Verify(x => x.IsTypeExists(table.Type), Times.Once);
+        }
+        [Fact]
+        public async void EditTable_ShouldReturnOkResponse_WhenTableDescriptionIsNullOrEmpty()
+        {
+            //Arrange
+            var tableDTO = _fixture.Create<AOTableDTO>();
+            tableDTO.Description = null;
+            var table = _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x => x.IsExists(table.Id)).Returns(true);
+            _tableMock.Setup(x => x.IsTypeExists(table.Type)).Returns(true);
+
+            //Act
+            var result = await _sut.EditTable(tableDTO);
+
+            //Assertion
+            result.Should().NotBeNull();
+            result.Result.Should().BeAssignableTo<OkObjectResult>();
+            _tableMock.Verify(x => x.IsExists(table.Id), Times.Once);
+            _tableMock.Verify(x => x.IsTypeExists(table.Type), Times.Once);
+        }
+
+
+
+
+
+        [Fact]
+        public void DeleteBrand_ShouldReturnOkResponse_WhenTableIdIsVaildForDelete()
+        {
+            //Arrange
+            var tableDTO = _fixture.Create<AOTableDTO>();
+            var table = _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x => x.IsExists(tableDTO.Id)).Returns(true);
+            _tableMock.Setup(x => x.DeleteTable(tableDTO.Id)).Returns(true);
+
+            //Act
+            var result = _sut.DeleteTable(tableDTO.Id);
+            //Assert
+            result.Should().NotBeNull();
+            result.Should().BeAssignableTo<OkObjectResult>();
+            _tableMock.Verify(x => x.DeleteTable(tableDTO.Id), Times.Once);
+            _tableMock.Verify(x => x.IsExists(tableDTO.Id), Times.Once);
+
+
+        }
+
+        [Fact]
+        public void DeleteTable_ShouldReturnNotFoundResponse_WhenTableIdIsNotVaildForDelete()
+        {
+            //Arrange
+            var tableDTO = _fixture.Create<AOTableDTO>();
+            var table = _mapper.Map<AOTable>(tableDTO);
+            _tableMock.Setup(x => x.IsExists(tableDTO.Id)).Returns(false);
+            _tableMock.Setup(x=>x.DeleteTable(tableDTO.Id)).Returns(true);
+            //Act
+            var result = _sut.DeleteTable(tableDTO.Id);
+            //Assert
+            result.Should().NotBeNull();
+            result.Should().BeAssignableTo<NotFoundObjectResult>();
+            _tableMock.Verify(x => x.IsExists(tableDTO.Id), Times.Once);
+            _tableMock.Verify(x=>x.DeleteTable(tableDTO.Id), Times.Never);
+           
+        }
+
+
     }
 
 
