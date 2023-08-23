@@ -10,5 +10,8 @@ namespace AOTableInterface
     public interface IAOTableInterface
     {
         public Task<ICollection<AOTable>> GetTable(string name, string[] typeList);
+        public Task<AOTable> AddTable(AOTable table);
+        public bool  IsExists(Guid id);
+        public bool IsTypeExists(string typeName);
     }
 }
