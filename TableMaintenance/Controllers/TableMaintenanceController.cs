@@ -19,7 +19,7 @@ namespace TableMaintenance.Controllers
             _mapper = mapper;
         }
         #region Search Table
-        [HttpPost]
+        [HttpGet]
         [Route("[controller]/SearchTable")]
         public async Task<ActionResult<ICollection<AOTableDTO>>> SearchTable([FromQuery] string? tableName, [FromQuery] string[]? typeList) 
         {
@@ -42,6 +42,7 @@ namespace TableMaintenance.Controllers
             }
         }
         #endregion
+        #region Add Table
         [HttpPost]
         [Route("[controller]/AddTable")]
         public async Task<ActionResult<AOTableDTO>> AddTable([FromBody]AOTableDTO tableDTO)
@@ -72,6 +73,8 @@ namespace TableMaintenance.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
+        #region View Table
         [HttpGet]
         [Route("[controller]/ViewTable/{id}")]
         public async Task<ActionResult<AOTableDTO>> ViewTable([FromRoute]Guid id)
@@ -92,6 +95,8 @@ namespace TableMaintenance.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
+        #region Edit Table
         [HttpPut]
         [Route("[controller]/EditTable")]
         public async Task<ActionResult<AOTableDTO>> EditTable([FromBody] AOTableDTO tableDTO)
@@ -122,6 +127,8 @@ namespace TableMaintenance.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
+        # region Delete Table
         [HttpDelete]
         [Route("[controller]/deleteTable/{id}")]
         public ActionResult DeleteTable([FromRoute] Guid id)
@@ -131,7 +138,9 @@ namespace TableMaintenance.Controllers
                 if ( _tableInterface.IsExists(id))
                 {
                     _tableInterface.DeleteTable(id);
-                    return Ok("Deleted");
+                    var data= Json(new { status = "Deleted" });
+
+                    return Ok(data);
                 }
                 return NotFound("Id Not Found");
             }
@@ -140,6 +149,7 @@ namespace TableMaintenance.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
 
     }
 }
