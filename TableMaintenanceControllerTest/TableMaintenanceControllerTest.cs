@@ -58,7 +58,7 @@ namespace TableMaintenanceTest
             //Arrange
             var tableName = _fixture.Create<string>();
             var typeList = _fixture.Create<string[]>();
-            ICollection<AOTable> expectedTableList = null;
+            ICollection<AOTable>? expectedTableList = null;
             _tableMock.Setup(x => x.GetTable(tableName, typeList)).ReturnsAsync(expectedTableList);
 
             //Act

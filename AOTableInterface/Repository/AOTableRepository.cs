@@ -22,11 +22,11 @@ namespace AOTableInterface.Repository
 
         
         #region Get Search Table
-        public async Task<ICollection<AOTable>> GetTable(string? name, string[] typeList)
+        public async Task<ICollection<AOTable>> GetTable(string name, string[] typeList)
         {
             if (!string.IsNullOrEmpty(name)&&typeList.Length==0)
             {
-                return await _context.Tables.Where(x=>x.Name.Contains(name)).ToListAsync();
+                return await _context.Tables.Where(x => x.Name.Contains(name)).ToListAsync();
             }
             else if(!string.IsNullOrEmpty(name)&&typeList.Length==1)
             {

@@ -29,7 +29,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.Test", "5.Test", "{E02078
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapper", "Mapper\Mapper.csproj", "{BA795087-D70C-4A27-A05B-4167CB8B66A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableMaintenanceTest", "TableMaintenanceControllerTest\TableMaintenanceTest.csproj", "{9A8DD4B1-F3A7-42AB-8C6C-4A016EE0E6C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TableMaintenanceTest", "TableMaintenanceControllerTest\TableMaintenanceTest.csproj", "{9A8DD4B1-F3A7-42AB-8C6C-4A016EE0E6C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE0A56FC-FB7A-4C5D-ABA7-6C8698EB3256}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

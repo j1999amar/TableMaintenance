@@ -21,7 +21,7 @@ namespace TableMaintenance.Controllers
         #region Search Table
         [HttpGet]
         [Route("[controller]/SearchTable")]
-        public async Task<ActionResult<ICollection<AOTableDTO>>> SearchTable([FromQuery] string? tableName, [FromQuery] string[]? typeList) 
+        public async Task<ActionResult<ICollection<AOTableDTO>>> SearchTable([FromQuery] string tableName, [FromQuery] string[] typeList) 
         {
             try
             {
