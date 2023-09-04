@@ -15,6 +15,8 @@ namespace TableDbContext
             
         }
         public DbSet<AOTable> Tables { get; set; }
+        public DbSet<AOColumn> AOColumns { get; set; }
+        public DbSet<Form> Forms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

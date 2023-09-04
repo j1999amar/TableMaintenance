@@ -91,9 +91,30 @@ namespace AOTableInterface.Repository
 
         public  bool DeleteTable(Guid id)
         {
-            var  table=  _context.Tables.Find(id);
-            _context.Tables.Remove(table);
-            return _context.SaveChanges() > 0 ? true : false;
+            if (DeleteTableCheck(id))
+            {
+                var table = _context.Tables.Find(id);
+                _context.Tables.Remove(table);
+                return _context.SaveChanges() > 0 ? true : false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+         
+        public bool DeleteTableCheck(Guid id)
+        {
+           var column=_context.AOColumns.Where(x=>x.TableId==id).SingleOrDefault();
+           var form=_context.Forms.Where(x => x.TableId == id).SingleOrDefault();
+            if( column!=null | form != null)
+            {
+                return false;
+            }
+           
+                return true;
+            
+
         }
     }
 }

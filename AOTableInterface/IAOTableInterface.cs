@@ -15,6 +15,8 @@ namespace AOTableInterface
         public Task<AOTable> EditTable(AOTable table);
         public bool DeleteTable(Guid id);
 
+        public bool DeleteTableCheck(Guid id);
+
         public bool  IsExists(Guid id);
         public bool IsTypeExists(string typeName);
     }

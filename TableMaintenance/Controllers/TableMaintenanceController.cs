@@ -137,10 +137,19 @@ namespace TableMaintenance.Controllers
             {
                 if ( _tableInterface.IsExists(id))
                 {
-                    _tableInterface.DeleteTable(id);
-                    var data= Json(new { status = "Deleted" });
+                   if(_tableInterface.DeleteTable(id))
+                    {
+                        var data = Json(new { status = "Deleted" });
 
-                    return Ok(data);
+                        return Ok(data);
+
+                    }
+                    else
+                    {
+
+                        return BadRequest("Id is having child");
+                    }
+                    
                 }
                 return NotFound("Id Not Found");
             }
