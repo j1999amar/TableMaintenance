@@ -29,7 +29,7 @@ namespace TableMaintenance.Controllers
                 var tableListDto = _mapper.Map<ICollection<AOTableDTO>>(tableList);
                 if(tableListDto.Count==0 )
                 {
-                    return NotFound("Data Not Found");
+                    return NotFound("Table "+ tableName + " is not found");
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace TableMaintenance.Controllers
                     else
                     {
 
-                        return BadRequest("Id can't be delete because it used by other tables");
+                        return BadRequest( "Table can't be delete because it used by other tables like Forms,Columns etc..");
                     }
                     
                 }
