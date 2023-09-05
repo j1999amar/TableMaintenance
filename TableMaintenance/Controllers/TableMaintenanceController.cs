@@ -147,7 +147,7 @@ namespace TableMaintenance.Controllers
                     else
                     {
 
-                        return BadRequest("Id is having child");
+                        return BadRequest("Id can't be delete because it used by other tables");
                     }
                     
                 }

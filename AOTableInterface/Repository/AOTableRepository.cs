@@ -105,8 +105,8 @@ namespace AOTableInterface.Repository
          
         public bool DeleteTableCheck(Guid id)
         {
-           var column=_context.AOColumns.Where(x=>x.TableId==id).SingleOrDefault();
-           var form=_context.Forms.Where(x => x.TableId == id).SingleOrDefault();
+           var column=_context.AOColumns.Where(x=>x.TableId==id).FirstOrDefault();
+           var form=_context.Forms.Where(x => x.TableId == id).FirstOrDefault();
             if( column!=null | form != null)
             {
                 return false;
